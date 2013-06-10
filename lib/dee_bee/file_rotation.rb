@@ -2,11 +2,14 @@ module DeeBee
   class FileRotation
     include DeeBee::Helpers
 
-    attr_reader :directory, :file_prefix
+    DEFAULT_DAYS_TO_KEEP_DAILY_FILES = 7
+
+    attr_reader :directory, :file_prefix, :days_to_keep_daily_files
 
     def initialize (configuration = DeeBee::Configuration.new)
       @directory =  configuration.settings['file_rotation']['directory']
       @file_prefix =  configuration.settings['file_rotation']['file_prefix']
+      @days_to_keep_daily_files = configuration.settings['file_rotation']['days_to_keep_daily_files']
     end
 
     def execute
@@ -26,7 +29,7 @@ module DeeBee
 
         puts "  Remove /daily files older than 7 days"
         remove_files_not_containing_substrings :directory => File.join([directory, 'daily']),
-          :substrings => (0..6).collect{ |days_ago| (Date.today - days_ago).strftime("%Y%m%d_") }
+          :substrings => substrings_for_files_to_keep
       end
     end
 
@@ -35,6 +38,10 @@ module DeeBee
     def validate_settings
       raise "File Rotation Failed: 'directory' setting not found" unless !!directory
       raise "File Rotation Failed: 'file_prefix' setting not found" unless !!file_prefix
+    end
+
+    def substrings_for_files_to_keep
+      (0..((days_to_keep_daily_files || DEFAULT_DAYS_TO_KEEP_DAILY_FILES) - 1)).collect{ |days_ago| (Date.today - days_ago).strftime("%Y%m%d_") }
     end
   end    
 end

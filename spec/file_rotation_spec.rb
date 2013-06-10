@@ -9,7 +9,8 @@ describe DeeBee::FileRotation do
           m.stubs(:settings).returns({
             'file_rotation' => {
               'directory'   => '/tmp/backups',
-              'file_prefix' => 'test_project'
+              'file_prefix' => 'test_project',
+              'days_to_keep_daily_files' => 7
             }
           })
         end
