@@ -1,0 +1,22 @@
+name: <usually project name>
+backup:
+  directory:   </path/to/backups>
+  file_prefix: <usually project name>
+  database:
+    provider: mysql
+    host: localhost
+    database_name: <databasde name>
+file_rotation:
+  directory:   </path/to/backups>
+  file_prefix: <usually project name>
+cloud_sync:
+  local_directory: </path/to/backups>
+  credentials:
+    provider:              aws
+    aws_access_key_id:     <key>
+    aws_secret_access_key: <secret>
+  provider_settings:
+    remote_storage: <remote directory or bucket name>
+  long_term_archive:
+    subdirectory: <subdirectory name>
+    rotation_age: <age in days>
