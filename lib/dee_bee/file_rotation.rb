@@ -9,7 +9,7 @@ module DeeBee
     def initialize (configuration = DeeBee::Configuration.new)
       @directory =  configuration.settings['file_rotation']['directory']
       @file_prefix =  configuration.settings['file_rotation']['file_prefix']
-      @days_to_keep_daily_files = configuration.settings['file_rotation']['days_to_keep_daily_files']
+      @days_to_keep_daily_files = configuration.settings['file_rotation']['days_to_keep_daily_files'] || DEFAULT_DAYS_TO_KEEP_DAILY_FILES
     end
 
     def execute
@@ -27,7 +27,7 @@ module DeeBee
           :pattern       => "#{file_prefix}*.sql.gz",
           :new_directory => File.join([directory, 'daily'])
 
-        puts "  Remove /daily files older than 7 days"
+        puts "  Remove /daily files older than #{days_to_keep_daily_files} days"
         remove_files_not_containing_substrings :directory => File.join([directory, 'daily']),
           :substrings => substrings_for_files_to_keep
       end
@@ -41,7 +41,9 @@ module DeeBee
     end
 
     def substrings_for_files_to_keep
-      (0..((days_to_keep_daily_files || DEFAULT_DAYS_TO_KEEP_DAILY_FILES) - 1)).collect{ |days_ago| (Date.today - days_ago).strftime("%Y%m%d_") }
+      (0..(days_to_keep_daily_files - 1)).collect{ |days_ago| (Date.today - days_ago).strftime("%Y%m%d_") }
     end
+
+    def 
   end    
 end
