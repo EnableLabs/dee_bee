@@ -43,7 +43,5 @@ module DeeBee
     def substrings_for_files_to_keep
       (0..(days_to_keep_daily_files - 1)).collect{ |days_ago| (Date.today - days_ago).strftime("%Y%m%d_") }
     end
-
-    def 
   end    
 end
