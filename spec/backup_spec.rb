@@ -30,6 +30,7 @@ describe DeeBee::Backup do
 
         backup.expects("run_command").with("/usr/bin/env mysqldump -hlocalhost test_database | gzip > /tmp/backups/test_project_20130603_120000.sql.gz").returns(nil)
         backup.expects(:validate_mysqldump_created_file).returns(nil)
+        backup.expects(:validate_path_exists).returns(nil)
 
         backup.execute
 
