@@ -20,7 +20,7 @@ module DeeBee
           validate_path_exists
 
           # NOTE - no use of -u or -p as we are using ~/.my.cnf for these arguments
-          run_command("/usr/bin/env mysqldump -h#{backup_settings['database']['host']} #{backup_settings['database']['database_name']} | gzip > #{backup_filepath}")
+          run_command("/usr/bin/env mysqldump -h#{database_host} #{database_name} | gzip > #{backup_filepath}")
 
           validate_mysqldump_created_file
         else
@@ -32,7 +32,7 @@ module DeeBee
     private
 
     def performing_mysql_backup?
-      backup_settings['database']['provider'].downcase =~ /mysql/
+      database_provider.downcase =~ /mysql/
     end
 
     def validate_my_cnf_present
@@ -40,11 +40,11 @@ module DeeBee
     end
 
     def validate_host_setting_present
-      raise "database host not defined in setting yaml file" if backup_settings['database']['host'].nil?
+      raise "database host not defined in setting yaml file" if database_host.nil?
     end
 
     def validate_database_name_setting_present
-      raise "database name not defined in setting yaml file" if backup_settings['database']['database_name'].nil?
+      raise "database name not defined in setting yaml file" if database_name.nil?
     end
 
     def validate_path_exists
@@ -71,6 +71,18 @@ module DeeBee
       else
         raise "Backup did not create file!"  
       end
+    end
+
+    def database_host
+      backup_settings['database']['host'] rescue nil
+    end
+
+    def database_name
+      backup_settings['database']['database_name'] rescue nil
+    end
+
+    def database_provider
+      backup_settings['database']['provider'] rescue nil
     end
   end
 end
