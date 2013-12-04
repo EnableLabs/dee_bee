@@ -38,7 +38,7 @@ describe DeeBee::Backup do
       end
 
       it "should validate ~/.my.cnf is present" do
-        File.any_instance.expects(:exists?).returns(false)
+        File.expects(:exists?).returns(false)
         expect { backup.execute }.to raise_error("~/.my.cnf file not found.  Please create and define user and password arguments")
       end
 
@@ -66,7 +66,7 @@ describe DeeBee::Backup do
         backup.expects(:validate_path_exists).returns(nil)
 
         expect do
-          File.any_instance.expects(:exists).with(file_name).returns false
+          File.expects(:exists?).with(file_name).returns false
           backup.execute
         end.to raise_error("Backup did not create file!" )
 
