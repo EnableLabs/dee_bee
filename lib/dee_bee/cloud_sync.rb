@@ -38,13 +38,16 @@ module DeeBee
     private
 
     def create_local_files_metadata
-      Dir.glob('**/*').inject({}) do |hsh, path|
+      puts "  Creating local file metadata..."
+      local_files_metadata = Dir.glob('**/*').inject({}) do |hsh, path|
         if File.directory? path
           hsh.update("#{path}/" => :directory)
         else
           hsh.update(path => Digest::MD5.hexdigest(File.read(path)))
         end
       end
+      puts "  done creating metadata."
+      local_files_metadata
     end
 
     def file_metadata_contains_files? (file_metadata)
