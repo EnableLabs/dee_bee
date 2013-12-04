@@ -98,7 +98,7 @@ module DeeBee
     end
 
     def remote_directory_file_etag (remote_directory, file) 
-      remote_directory.files.get(file).etag
+      remote_directory.files.head(file).etag
     end
 
     def create_directory_on_remote_directory (path, remote_directory)
