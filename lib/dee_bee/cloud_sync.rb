@@ -6,6 +6,8 @@ module DeeBee
   class CloudSync
     include DeeBee::Helpers
 
+    class NoHeadError < StandardError; end;
+
     attr_reader :sync_settings
 
     def initialize (configuration = DeeBee::Configuration.new)
@@ -96,12 +98,15 @@ module DeeBee
 
     def identical_file_in_remote_directory? (remote_directory, file, etag)
       remote_directory_file_etag(remote_directory, file) == etag
-    rescue Excon::Errors::NotFound
+    rescue Excon::Errors::NotFound, NoHeadError
       return false
     end
 
     def remote_directory_file_etag (remote_directory, file) 
-      remote_directory.files.head(file).etag
+      head = remote_directory.files.head(file)
+      raise NoHeadError if head.nil?
+      
+      head.etag
     end
 
     def create_directory_on_remote_directory (path, remote_directory)
