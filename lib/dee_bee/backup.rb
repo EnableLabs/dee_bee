@@ -69,7 +69,7 @@ module DeeBee
       if File.exists?(backup_filepath)
         puts "  created #{backup_filepath}"
       else
-        raise "Backup did not create file!"  
+        raise "Backup did not create file!"
       end
     end
 
