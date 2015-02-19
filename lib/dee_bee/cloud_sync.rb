@@ -6,14 +6,15 @@ module DeeBee
   class CloudSync
     include DeeBee::Helpers
 
-    class NoHeadError < StandardError; end;
+    class NoHeadError < StandardError
+    end
 
     attr_reader :sync_settings
 
     def initialize (configuration = DeeBee::Configuration.new)
       @sync_settings =  configuration.settings['cloud_sync']
     end
-    
+
     def execute
       puts "\nPerforming cloud sync..."
       time_elapsed_for("Cloud sync") do
