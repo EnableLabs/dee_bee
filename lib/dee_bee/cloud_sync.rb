@@ -48,7 +48,7 @@ module DeeBee
           hsh.update(path => Digest::MD5.file(path).hexdigest)
         end
       end
-      puts "  done creating metadata."
+      puts "  done creating metadata at #{Time.now}"
       local_files_metadata
     end
 
