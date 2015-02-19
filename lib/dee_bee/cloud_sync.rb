@@ -23,7 +23,7 @@ module DeeBee
         puts "    to provider '#{sync_settings['credentials']['provider']}'"
         puts "    on storage '#{sync_settings['provider_settings']['remote_storage']}'"
 
-        Dir.chdir(local_directory) do    
+        Dir.chdir(local_directory) do
           local_files_metadata = create_local_files_metadata
           raise 'local file list is empty: aborting' unless file_metadata_contains_files?(local_files_metadata)
 
@@ -103,10 +103,10 @@ module DeeBee
       return false
     end
 
-    def remote_directory_file_etag (remote_directory, file) 
+    def remote_directory_file_etag (remote_directory, file)
       head = remote_directory.files.head(file)
       raise NoHeadError if head.nil?
-      
+
       head.etag
     end
 
