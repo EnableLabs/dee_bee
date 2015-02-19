@@ -11,6 +11,8 @@ module DeeBee
     # Delete files orphaned on the remote after 30 days
     DEFAULT_DAYS_TO_KEEP_ORPHANS = 30
 
+    DEFAULT_DAYS_TO_KEEP_DAILY_FILES = 7
+
     def run_command (command)
       stdin, stdout, stderr = Open3.popen3(command)
       errors = stderr.readlines

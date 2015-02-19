@@ -2,8 +2,6 @@ module DeeBee
   class FileRotation
     include DeeBee::Helpers
 
-    DEFAULT_DAYS_TO_KEEP_DAILY_FILES = 7
-
     attr_reader :directory, :file_prefix, :days_to_keep_daily_files
 
     def initialize (configuration = DeeBee::Configuration.new)
@@ -43,5 +41,5 @@ module DeeBee
     def substrings_for_files_to_keep
       (0..(days_to_keep_daily_files - 1)).collect{ |days_ago| (Date.today - days_ago).strftime("%Y%m%d_") }
     end
-  end    
+  end
 end
