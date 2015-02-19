@@ -78,7 +78,7 @@ module DeeBee
       start_time = Time.now
       result = yield
       elapsed_time = Time.now - start_time
-      print green, "#{name} completed in #{ "%0.2f" % elapsed_time } seconds", reset, "\n"
+      print(green, "#{name} completed in #{ "%0.2f" % elapsed_time } seconds", reset, "\n")
       result
     end
   end
