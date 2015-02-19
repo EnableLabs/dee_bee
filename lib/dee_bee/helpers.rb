@@ -8,6 +8,9 @@ module DeeBee
   module Helpers
     ONE_MONTH = 60 * 60 * 24 * 30
 
+    # Delete files orphaned on the remote after 30 days
+    DEFAULT_DAYS_TO_KEEP_ORPHANS = 30
+
     def run_command (command)
       stdin, stdout, stderr = Open3.popen3(command)
       errors = stderr.readlines
@@ -49,10 +52,10 @@ module DeeBee
       copy_files_of_pattern_to_directoy (opts.merge(:remove_original => true))
     end
 
-    def remove_files_not_containing_substrings (opts) 
+    def remove_files_not_containing_substrings (opts)
       substrings = opts[:substrings].is_a?(String) ? [opts[:substrings]] : opts[:substrings]
       files = Dir.glob("#{opts[:directory]}/**/*").select { |fn| File.file?(fn) }
-      
+
       files.each do |filename|
         unless substrings.any?{ |substring| File.basename(filename) =~ /#{substring}/ }
           if !!opts[:pretend]

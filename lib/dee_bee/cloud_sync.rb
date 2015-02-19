@@ -31,9 +31,8 @@ module DeeBee
           remote_directory = get_remote_directory(remote_storage)
 
           upload_local_files_to_remote_directory(local_files_metadata, remote_directory)
-          remove_orphaned_remote_files_older_than(local_files_metadata, remote_directory, 30) #Days
+          remove_orphaned_remote_files_older_than(local_files_metadata, remote_directory, DEFAULT_DAYS_TO_KEEP_ORPHANS)
           move_remote_files_to_long_term_storage_directory(remote_storage, local_files_metadata, remote_directory)
-          # remote_directory.files.inject([]){ |keys, remote_object| keys << remote_object.key; keys }
         end
       end
     end
@@ -80,7 +79,7 @@ module DeeBee
       end
     end
 
-    def remove_orphaned_remote_files_older_than(local_files_metadata, remote_directory, days_old=30)
+    def remove_orphaned_remote_files_older_than(local_files_metadata, remote_directory, days_old=DEFAULT_DAYS_TO_KEEP_ORPHANS)
       puts "\n  Checking orphaned remote files"
       remote_directory.files.each do |remote_object|
         unless local_files_metadata.has_key? remote_object.key
