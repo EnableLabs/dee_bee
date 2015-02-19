@@ -45,7 +45,7 @@ module DeeBee
         if File.directory? path
           hsh.update("#{path}/" => :directory)
         else
-          hsh.update(path => Digest::MD5.hexdigest(File.read(path)))
+          hsh.update(path => Digest::MD5.file(path).hexdigest)
         end
       end
       puts "  done creating metadata."
