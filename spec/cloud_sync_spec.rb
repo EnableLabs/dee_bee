@@ -5,7 +5,7 @@ describe DeeBee::CloudSync do
   describe '#execute' do
     describe 'given settings for cloud sync' do
       let(:mock_configuration) do
-        mock('MockDeeBeeConfiguration').tap do |m|
+        double('MockDeeBeeConfiguration').tap do |m|
           m.stubs(:settings).returns({
             'cloud_sync' => {
               'local_directory' => '/tmp/backups',

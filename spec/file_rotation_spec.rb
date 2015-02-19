@@ -5,7 +5,7 @@ describe DeeBee::FileRotation do
   describe '#execute' do
     describe 'given settings for file rotation' do
       let(:mock_configuration) do
-        mock('MockDeeBeeConfiguration').tap do |m|
+        double('MockDeeBeeConfiguration').tap do |m|
           m.stubs(:settings).returns({
             'file_rotation' => {
               'directory'   => '/tmp/backups',

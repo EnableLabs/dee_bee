@@ -4,7 +4,7 @@ describe DeeBee::Backup do
   describe '#execute' do
     describe 'given settings for a mysql database' do
       let(:mock_configuration) do
-        mock('MockDeeBeeConfiguration').tap do |m|
+        double('MockDeeBeeConfiguration').tap do |m|
           m.stubs(:settings).returns({
            'backup' => {
               'directory'   => '/tmp/backups',
