@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["cifarelli@gmail.com"]
   spec.description   = %q{Ruby based utilities for database backup, file rotation, and syncing to remote storage}
   spec.summary       = %q{Ruby based utilities for database backup, file rotation, and syncing to remote storage}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/EnableLabs/dee_bee"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
