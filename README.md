@@ -19,7 +19,7 @@ Specific actions can be programatically called in your Ruby project by utilizing
 
 ### Settings Configuration
 
-Dee Bee requires a settings files in YAML to instruct how backups, rotations, and synchronisztions are to be performed.
+Dee Bee requires a settings files in YAML to instruct how backups, rotations, and synchronizations are to be performed.
 
 Your settings yaml file should follow the hash schema as follows:
 
@@ -52,20 +52,20 @@ Your settings yaml file should follow the hash schema as follows:
 
 Specify a settings yaml file with '--settings':
 
-	dee_bee --settings <filename>
+	$ dee_bee --settings <filename>
 
 A default 'settings.yaml' file will be searched for in the current working directory if '--settings' is not utilized.
 
 
 Specify specific actions to perform with '--backup', '--rotation', '--cloud-sync'
 
-	dee_bee --backup --settings <filename>
-	dee_bee --rotation --settings <filename>
-	dee_bee --cloud-sync --settings <filename>
+	$ dee_bee --backup --settings <filename>
+	$ dee_bee --rotation --settings <filename>
+	$ dee_bee --cloud-sync --settings <filename>
 
 Run all actions:
 
-	dee_bee --all --settings <filename>
+	$ dee_bee --all --settings <filename>
 
 
 ## Contributing
@@ -75,3 +75,5 @@ Run all actions:
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+Thank you to all [the contributors](https://github.com/EnableLabs/dee_bee/contributors)!
