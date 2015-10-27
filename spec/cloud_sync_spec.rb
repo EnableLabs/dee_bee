@@ -16,6 +16,10 @@ describe DeeBee::CloudSync do
               },
               'provider_settings' => {
                 'remote_storage' => 'production.backups'
+              },
+              'long_term_archive' => {
+                'subdirectory' => 'long_term_archive_directory',
+                'rotation_age' => 365
               }
             }
           })

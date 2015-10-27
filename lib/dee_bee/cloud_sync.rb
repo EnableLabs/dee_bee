@@ -83,6 +83,8 @@ module DeeBee
       puts "\n  Checking orphaned remote files"
       remote_directory.files.each do |remote_object|
         unless local_files_metadata.has_key? remote_object.key
+          next if remote_object_in_long_term_archive?(remote_object.key)
+
           object_age_in_days = age_in_days(remote_object.last_modified)
           age_text = "day#{ object_age_in_days == 1 ? '' : 's' } old"
 
@@ -156,6 +158,13 @@ module DeeBee
           end
         end
       end
+    end
+
+    def remote_object_in_long_term_archive? (remote_object_key)
+      return false unless !!sync_settings['long_term_archive']
+      return false unless !!sync_settings['long_term_archive']['subdirectory']
+
+      return remote_object_key =~ /^#{ sync_settings['long_term_archive']['subdirectory'] }\//
     end
   end
 end
